@@ -7,7 +7,7 @@ Options +FollowSymLinks
 RewriteEngine On
 
 # Basepath
-RewriteBase /slim-mvc-skel/public_html
+RewriteBase /database-easy-and-fast/public_html
 
 # Rewrite do slim
 RewriteCond %{REQUEST_FILENAME} !-f
