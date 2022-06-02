@@ -1,0 +1,9 @@
+# Temporary
+application/Tmp/templates_c/*
+!application/Tmp/**/.gitkeep
+
+# Vendor
+vendor/*
+
+# Composer
+composer.lock
