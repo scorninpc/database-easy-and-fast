@@ -34,29 +34,29 @@
 									<div class="btn-group" role="group" aria-label="Basic example">
 
 										<!-- novo servidor -->
-										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Nova conexão">
+										<button type="button" class="btn btn-lg btn-primary" data-bs-tooltip="tooltip" data-bs-placement="right" title="Nova conexão">
 											<i class="fa-solid fa-plus"></i>
 										</button>
 
 										<!-- conectar ou desconectar -->
-										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Conectar">
+										<button type="button" class="btn btn-lg btn-primary" data-bs-tooltip="tooltip" data-bs-placement="right" title="Conectar">
 											<i class="fa-solid fa-handshake-simple"></i>
 											<i class="fa-solid fa-handshake-simple-slash d-none"></i>
 										</button>
 
 										<!-- duplicar -->
-										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Duplicar conexão">
+										<button type="button" class="btn btn-lg btn-primary" data-bs-tooltip="tooltip" data-bs-placement="right" title="Duplicar conexão">
 											<i class="fa-solid fa-clone"></i>
 										</button>
 									</div>
 									<div class="btn-group ps-2" role="group" aria-label="Basic example">
 										<!-- novo grupo -->
-										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Novo grupo">
+										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#newGroupModal" data-bs-tooltip="tooltip" data-bs-placement="right" title="Novo grupo">
 											<i class="fa-solid fa-folder-plus"></i>
 										</button>
 
 										<!-- remover grupo -->
-										<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Deletar grupo">
+										<button type="button" class="btn btn-lg btn-primary" data-bs-tooltip="tooltip" data-bs-placement="right" title="Deletar grupo">
 											<i class="fa-solid fa-folder-minus"></i>
 										</button>
 									</div>
@@ -275,6 +275,28 @@
 				</div>
 			</div>
 		</div>
+
+		{* new group modal *}
+		<div class="modal fade" id="newGroupModal" tabindex="-1" aria-labelledby="newGroupLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form action="./groups/new" method="post" class="bg-form-action" target="doAfterNewGroup">
+						<div class="modal-header">
+							<h5 class="modal-title" id="newGroupLabel">Novo Grupo</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<input type="text" name="name" class="form-control">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<input type="submit" class="btn btn-primary" value="Criar novo gropo">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		
 		<!-- Option 1: Bootstrap Bundle with Popper -->
 		<script src="./assets/js/bootstrap.bundle.min.js"></script>
@@ -285,12 +307,17 @@
 
 		<script type="text/javascript">
 
-			var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-			var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-				return new bootstrap.Tooltip(tooltipTriggerEl)
-			})
+			/*
+				Tooltips
+				========================================================================== */
+			setTimeout(function() {
+				$('[data-bs-tooltip]:not(.tooltip-disabled)').tooltip();
+			}, 500);
 
-			
+
+			/*
+				Ajusta a interface
+				========================================================================== */
 			$(window).on('resize', function() {
 				// $('html, body, .all-site').height($(window).height());
 
@@ -316,6 +343,39 @@
 
 			// Força atualização da tela
 			$(window).resize();
+
+			/*
+				Background form action
+				========================================================================== */
+			$('.bg-form-action').on('submit', function(e) {
+				e.preventDefault();
+
+				var form = $(this),
+					action = form.attr('action'),
+					method = form.attr('method'),
+					callback = form.attr('target'),
+					formData = form.serialize();
+
+				$.ajax({
+					url: action,
+					type: method,
+					dataType: 'json',
+					data: formData
+				}).done(function(result) {
+					if (typeof window[callback] == "function") {
+						window['doAfterNewGroup'].call(this, result);
+					}
+				});
+
+			})
+
+			// After create group
+			window['doAfterNewGroup'] = function(result) {
+				console.log(result);
+
+				bootstrap.Modal.getOrCreateInstance($('#newGroupModal')[0]).hide();
+			}
+
 
 		</script>
 	</body>
