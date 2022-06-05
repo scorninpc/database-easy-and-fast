@@ -5,6 +5,7 @@ application/Tmp/templates_c/*
 
 #Database 
 application/Configs/data/user.sqlite
+!application/Configs/data/.gitkeep
 
 # Vendor
 vendor/*
