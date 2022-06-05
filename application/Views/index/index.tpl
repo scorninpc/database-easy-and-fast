@@ -69,53 +69,26 @@
 							<div class="col-12 p-0 h-100 overflow-auto bg-secondary">
 								<div class="accordion accordion-flush" id="servergroups">
 
-									<!-- Grupo -->
+									<!-- groups -->
+									{foreach from=$groups item=group}
 									<div class="accordion-item">
-										<h2 class="accordion-header" id="flush-headingOne">
-											<button class="accordion-button bg-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servergroup1" aria-expanded="false" aria-controls="servergroup1"><i class="fa-solid fa-folder"></i> &nbsp; GGGGGGGGGGG</button>
+										<h2 class="accordion-header" id="group{$group['idgroup']|escape}">
+											<button class="accordion-button bg-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servergroup{$group['idgroup']|escape}" aria-expanded="false" aria-controls="servergroup{$group['idgroup']|escape}">
+												<i class="fa-solid fa-folder"></i> &nbsp; {$group['name']|escape}
+											</button>
 										</h2>
-										<div id="servergroup1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#servergroups">
+										<div id="servergroup{$group['idgroup']|escape}" class="accordion-collapse collapse" aria-labelledby="group{$group['idgroup']|escape}" data-bs-parent="#servergroups">
 
-											<!-- Bancos -->
+											{* <!-- Bancos -->
 											<div class="list-group list-group-flush">
 												<a href="#" class="list-group-item list-group-item-action" aria-current="true"><i class="fa-solid fa-server"></i> &nbsp; Connect Leilões</a>
 												<a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-server"></i> &nbsp; Agencia General</a>
 												<a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-server"></i> &nbsp; IU3D</a>
-											</div>
+											</div> *}
 										</div>
 									</div>
+									{/foreach}
 
-									<!-- Grupo -->
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="flush-headingOne">
-											<button class="accordion-button bg-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servergroup2" aria-expanded="false" aria-controls="servergroup2"><i class="fa-solid fa-folder"></i> &nbsp; Clientes</button>
-										</h2>
-										<div id="servergroup2" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#servergroups">
-
-											<!-- Bancos -->
-											<div class="list-group list-group-flush">
-												<a href="#" class="list-group-item list-group-item-action" aria-current="true"><i class="fa-solid fa-server"></i> &nbsp; Connect Leilões</a>
-												<a href="#" class="list-group-item active"><i class="fa-solid fa-server"></i> &nbsp; Agencia General</a>
-												<a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-server"></i> &nbsp; IU3D</a>
-											</div>
-										</div>
-									</div>
-
-									<!-- Grupo -->
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="flush-headingTwo">
-											<button class="accordion-button bg-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servergroup3" aria-expanded="false" aria-controls="servergroup3"><i class="fa-solid fa-folder"></i> &nbsp; Localhost</button>
-										</h2>
-										<div id="servergroup3" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#servergroups">
-
-											<!-- Bancos -->
-											<div class="list-group list-group-flush">
-												<a href="#" class="list-group-item list-group-item-action" aria-current="true"><i class="fa-solid fa-server"></i> &nbsp; Connect Leilões</a>
-												<a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-server"></i> &nbsp; Agencia General</a>
-												<a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-server"></i> &nbsp; IU3D</a>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

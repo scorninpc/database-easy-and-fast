@@ -10,5 +10,9 @@ class indexController extends \Slim\Mvc\Controller
 
 		$model = new \Application\Models\Groups();
 		$model->install();
+		$groups = $model->get();
+
+		// 
+		$this->view->groups = $groups;
 	}
 }
