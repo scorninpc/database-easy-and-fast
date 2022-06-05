@@ -42,6 +42,18 @@ $container->set("view", function($container) use ($config) {
 
 // Initialize database
 if($config['db']['enabled']) {
+
+	// if database doesn't exists, create a blank file
+	if(!file_exists($config['db']['database'])) {
+		if(is_writable(dirname($config['db']['database']))) {
+			touch($config['db']['database']);
+		}
+		else {
+			die("You need to do permition to " . dirname($config['db']['database']));
+		}
+	}
+
+	// configure database
 	$database = new \Illuminate\Database\Capsule\Manager();
 	$database->addConnection($config['db']);
 	$database->setAsGlobal();

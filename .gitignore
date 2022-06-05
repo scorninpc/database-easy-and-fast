@@ -2,6 +2,10 @@
 application/Tmp/templates_c/*
 !application/Tmp/**/.gitkeep
 
+
+#Database 
+application/Configs/data/user.sqlite
+
 # Vendor
 vendor/*
 
