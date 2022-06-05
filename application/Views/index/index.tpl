@@ -298,11 +298,13 @@
 		</div>
 
 		
-		<!-- Option 1: Bootstrap Bundle with Popper -->
-		<script src="./assets/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript">
+			var ui = {};
+		</script>
 
-		<!-- JQuery -->
+		<script src="./assets/js/bootstrap.bundle.min.js"></script>
 		<script src="./assets/js/jquery.min.js"></script>
+		<script src="./assets/js/ui.groups.js"></script>
 
 
 		<script type="text/javascript">
@@ -371,7 +373,7 @@
 
 			// After create group
 			window['doAfterNewGroup'] = function(result) {
-				console.log(result);
+				ui.groups.add(result.data);
 
 				bootstrap.Modal.getOrCreateInstance($('#newGroupModal')[0]).hide();
 			}

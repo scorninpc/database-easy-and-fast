@@ -21,8 +21,8 @@ class groupsController extends \Slim\Mvc\Controller
 		die(json_encode([
 			'success' => TRUE,
 			'data' => [
-				'group_name' => $name,
-				'group_id' => $idgroup
+				'name' => $name,
+				'idgroup' => $idgroup
 			]
 		]));
 	}
