@@ -263,7 +263,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-							<input type="submit" class="btn btn-primary" value="Criar novo gropo">
+							<input type="submit" class="btn btn-primary" value="Criar novo grupo">
 						</div>
 					</form>
 				</div>
@@ -345,11 +345,7 @@
 			})
 
 			// After create group
-			window['doAfterNewGroup'] = function(result) {
-				ui.groups.add(result.data);
-
-				bootstrap.Modal.getOrCreateInstance($('#newGroupModal')[0]).hide();
-			}
+			window['doAfterNewGroup'] = ui.groups.new_callback;
 
 
 		</script>
