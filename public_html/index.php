@@ -41,35 +41,12 @@ $container->set("view", function($container) use ($config) {
 });
 
 // Initialize database
-// if($config['db']['enabled']) {
-// 	$database = new \Illuminate\Database\Capsule\Manager();
-// 	$database->addConnection($config['db']);
-// 	$database->setAsGlobal();
-// 	$database->bootEloquent();
-// }
-
-// Set the user config
-session_start();
-// unset($_SESSION['__dbeaf']);
-$container->set("user_config", function($container) {
-
-// file_put_contents(APPLICATION_PATH . "/Configs/user.json", json_encode([
-// 	'groups' => [
-// 		'8288281812.128182' => "Clientes",
-// 		'9812981237.128182' => "Localhost",
-// 	]
-// ]));
-
-	// Se não houver sessão, cria uma
-	if(!isset($_SESSION['__dbeaf'])) {
-		$json = json_decode(file_get_contents(APPLICATION_PATH . "/Configs/user.json"), TRUE);
-
-		// Carrega o json e coloca na sessão
-		$_SESSION['__dbeaf'] = $json;
-	}
-
-	return $_SESSION['__dbeaf'];
-});
+if($config['db']['enabled']) {
+	$database = new \Illuminate\Database\Capsule\Manager();
+	$database->addConnection($config['db']);
+	$database->setAsGlobal();
+	$database->bootEloquent();
+}
 
 // Set the config
 $container->set("config", function($container) use ($config) {

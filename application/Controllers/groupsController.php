@@ -10,25 +10,19 @@ class groupsController extends \Slim\Mvc\Controller
 	public function newAction()
 	{
 		// Recupera os parametros
-		$name = $this->getParam("name", "");
+		$name = $this->getPost("name", "");
 
-		// Salva na sessão
-		$grupos = $_SESSION['__dbeaf']['groups'];
-		
-		$uuid = uniqid(rand(1000, 9999));
-		$grupos[$uuid] = $name;
-
-
-		$_SESSION['__dbeaf']['groups'] = $grupos;
-
-		// Salva a sessão no arquivo
-		\Application\Helpers\UserConfig::save();
+		// Insere
+		$model = new \Application\Models\Groups();
+		$idgroup = $model->insert([
+			'name' => $name
+		]);
 
 		die(json_encode([
 			'success' => TRUE,
 			'data' => [
 				'group_name' => $name,
-				'group_id' => $uuid
+				'group_id' => $idgroup
 			]
 		]));
 	}
